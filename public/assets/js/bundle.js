@@ -30519,8 +30519,6 @@ module.exports = require('./lib/React');
 },{"./lib/React":156}],179:[function(require,module,exports){
 'use strict';
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -30532,6 +30530,112 @@ var _reactDom2 = _interopRequireDefault(_reactDom);
 var _jquery = require('jquery');
 
 var _jquery2 = _interopRequireDefault(_jquery);
+
+var _commentBox = require('./components/comment-box');
+
+var _commentBox2 = _interopRequireDefault(_commentBox);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+(0, _jquery2.default)(function () {
+  _reactDom2.default.render(_react2.default.createElement(_commentBox2.default, null), document.getElementById('comment-box'), function () {
+    console.timeEnd('react-app');
+  });
+});
+
+},{"./components/comment-box":181,"jquery":24,"react":178,"react-dom":27}],180:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require("react");
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var CommentAvatarList = function (_React$Component) {
+  _inherits(CommentAvatarList, _React$Component);
+
+  function CommentAvatarList() {
+    _classCallCheck(this, CommentAvatarList);
+
+    return _possibleConstructorReturn(this, (CommentAvatarList.__proto__ || Object.getPrototypeOf(CommentAvatarList)).apply(this, arguments));
+  }
+
+  _createClass(CommentAvatarList, [{
+    key: "render",
+    value: function render() {
+      var _props$avatars = this.props.avatars,
+          avatars = _props$avatars === undefined ? [] : _props$avatars;
+
+
+      return _react2.default.createElement(
+        "div",
+        { className: "comment-avatars" },
+        _react2.default.createElement(
+          "h4",
+          null,
+          "Authors"
+        ),
+        _react2.default.createElement(
+          "ul",
+          null,
+          avatars.map(function (avatarUrl, i) {
+            return _react2.default.createElement(
+              "li",
+              { key: i },
+              _react2.default.createElement("img", { src: avatarUrl })
+            );
+          })
+        )
+      );
+    }
+  }]);
+
+  return CommentAvatarList;
+}(_react2.default.Component);
+
+exports.default = CommentAvatarList;
+
+},{"react":178}],181:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _jquery = require('jquery');
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
+var _commentForm = require('./comment-form');
+
+var _commentForm2 = _interopRequireDefault(_commentForm);
+
+var _commentAvatarList = require('./comment-avatar-list');
+
+var _commentAvatarList2 = _interopRequireDefault(_commentAvatarList);
+
+var _comment = require('./comment');
+
+var _comment2 = _interopRequireDefault(_comment);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -30579,8 +30683,8 @@ var CommentBox = function (_React$Component) {
           _react2.default.createElement(
             'div',
             { className: 'comment-box' },
-            _react2.default.createElement(CommentForm, { addComment: this._addComment.bind(this) }),
-            _react2.default.createElement(CommentAvatarList, { avatars: this._getAvatars() }),
+            _react2.default.createElement(_commentForm2.default, { addComment: this._addComment.bind(this) }),
+            _react2.default.createElement(_commentAvatarList2.default, { avatars: this._getAvatars() }),
             this._getPopularMessage(comments.length),
             _react2.default.createElement(
               'h3',
@@ -30621,7 +30725,7 @@ var CommentBox = function (_React$Component) {
       var _this2 = this;
 
       return this.state.comments.map(function (comment) {
-        return _react2.default.createElement(Comment, {
+        return _react2.default.createElement(_comment2.default, {
           id: comment.id,
           author: comment.author,
           body: comment.body,
@@ -30683,62 +30787,85 @@ var CommentBox = function (_React$Component) {
   return CommentBox;
 }(_react2.default.Component);
 
-var CommentForm = function (_React$Component2) {
-  _inherits(CommentForm, _React$Component2);
+exports.default = CommentBox;
+
+},{"./comment":184,"./comment-avatar-list":180,"./comment-form":182,"jquery":24,"react":178}],182:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require("react");
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var CommentForm = function (_React$Component) {
+  _inherits(CommentForm, _React$Component);
 
   function CommentForm() {
     _classCallCheck(this, CommentForm);
 
-    var _this4 = _possibleConstructorReturn(this, (CommentForm.__proto__ || Object.getPrototypeOf(CommentForm)).call(this));
+    var _this = _possibleConstructorReturn(this, (CommentForm.__proto__ || Object.getPrototypeOf(CommentForm)).call(this));
 
-    _this4.state = {
+    _this.state = {
       characters: 0
     };
-    return _this4;
+    return _this;
   }
 
   _createClass(CommentForm, [{
-    key: 'render',
+    key: "render",
     value: function render() {
-      var _this5 = this;
+      var _this2 = this;
 
       return _react2.default.createElement(
-        'form',
-        { className: 'comment-form', onSubmit: this._handleSubmit.bind(this) },
+        "form",
+        { className: "comment-form", onSubmit: this._handleSubmit.bind(this) },
         _react2.default.createElement(
-          'label',
+          "label",
           null,
-          'New comment'
+          "New comment"
         ),
         _react2.default.createElement(
-          'div',
-          { className: 'comment-form-fields' },
-          _react2.default.createElement('input', { placeholder: 'Name:', ref: function ref(c) {
-              return _this5._author = c;
+          "div",
+          { className: "comment-form-fields" },
+          _react2.default.createElement("input", { placeholder: "Name:", ref: function ref(c) {
+              return _this2._author = c;
             } }),
-          _react2.default.createElement('textarea', { placeholder: 'Comment:', ref: function ref(c) {
-              return _this5._body = c;
+          _react2.default.createElement("textarea", { placeholder: "Comment:", ref: function ref(c) {
+              return _this2._body = c;
             }, onChange: this._getCharacterCount.bind(this) })
         ),
         _react2.default.createElement(
-          'p',
+          "p",
           null,
           this.state.characters,
-          ' characters'
+          " characters"
         ),
         _react2.default.createElement(
-          'div',
-          { className: 'comment-form-actions' },
+          "div",
+          { className: "comment-form-actions" },
           _react2.default.createElement(
-            'button',
-            { type: 'submit' },
-            'Post comment'
+            "button",
+            { type: "submit" },
+            "Post comment"
           )
         )
       );
     }
   }, {
-    key: '_getCharacterCount',
+    key: "_getCharacterCount",
     value: function _getCharacterCount() {
 
       this.setState({
@@ -30746,7 +30873,7 @@ var CommentForm = function (_React$Component2) {
       });
     }
   }, {
-    key: '_handleSubmit',
+    key: "_handleSubmit",
     value: function _handleSubmit(event) {
       event.preventDefault();
 
@@ -30762,60 +30889,138 @@ var CommentForm = function (_React$Component2) {
   return CommentForm;
 }(_react2.default.Component);
 
-var CommentAvatarList = function (_React$Component3) {
-  _inherits(CommentAvatarList, _React$Component3);
+exports.default = CommentForm;
 
-  function CommentAvatarList() {
-    _classCallCheck(this, CommentAvatarList);
+},{"react":178}],183:[function(require,module,exports){
+"use strict";
 
-    return _possibleConstructorReturn(this, (CommentAvatarList.__proto__ || Object.getPrototypeOf(CommentAvatarList)).apply(this, arguments));
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require("react");
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var CommentRemoveConfirmation = function (_React$Component) {
+  _inherits(CommentRemoveConfirmation, _React$Component);
+
+  function CommentRemoveConfirmation() {
+    _classCallCheck(this, CommentRemoveConfirmation);
+
+    var _this = _possibleConstructorReturn(this, (CommentRemoveConfirmation.__proto__ || Object.getPrototypeOf(CommentRemoveConfirmation)).call(this));
+
+    _this.state = {
+      showConfirm: false
+    };
+    return _this;
   }
 
-  _createClass(CommentAvatarList, [{
-    key: 'render',
+  _createClass(CommentRemoveConfirmation, [{
+    key: "render",
     value: function render() {
-      var _props$avatars = this.props.avatars,
-          avatars = _props$avatars === undefined ? [] : _props$avatars;
 
+      var confirmNode = void 0;
+
+      if (this.state.showConfirm) {
+        return _react2.default.createElement(
+          "span",
+          null,
+          _react2.default.createElement(
+            "a",
+            { href: "", onClick: this._confirmDelete.bind(this) },
+            "Yes "
+          ),
+          " - or - ",
+          _react2.default.createElement(
+            "a",
+            { href: "", onClick: this._toggleConfirmMessage.bind(this) },
+            " No"
+          )
+        );
+      } else {
+        confirmNode = _react2.default.createElement(
+          "a",
+          { href: "", onClick: this._toggleConfirmMessage.bind(this) },
+          "Delete comment?"
+        );
+      }
 
       return _react2.default.createElement(
-        'div',
-        { className: 'comment-avatars' },
-        _react2.default.createElement(
-          'h4',
-          null,
-          'Authors'
-        ),
-        _react2.default.createElement(
-          'ul',
-          null,
-          avatars.map(function (avatarUrl, i) {
-            return _react2.default.createElement(
-              'li',
-              { key: i },
-              _react2.default.createElement('img', { src: avatarUrl })
-            );
-          })
-        )
+        "span",
+        null,
+        confirmNode
       );
+    }
+  }, {
+    key: "_toggleConfirmMessage",
+    value: function _toggleConfirmMessage(e) {
+      e.preventDefault();
+
+      this.setState({
+        showConfirm: !this.state.showConfirm
+      });
+    }
+  }, {
+    key: "_confirmDelete",
+    value: function _confirmDelete(e) {
+      e.preventDefault();
+      this.props.onDelete();
     }
   }]);
 
-  return CommentAvatarList;
+  return CommentRemoveConfirmation;
 }(_react2.default.Component);
 
-var Comment = function (_React$Component4) {
-  _inherits(Comment, _React$Component4);
+exports.default = CommentRemoveConfirmation;
+
+},{"react":178}],184:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _commentRemoveConfirmation = require('./comment-remove-confirmation');
+
+var _commentRemoveConfirmation2 = _interopRequireDefault(_commentRemoveConfirmation);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Comment = function (_React$Component) {
+  _inherits(Comment, _React$Component);
 
   function Comment() {
     _classCallCheck(this, Comment);
 
-    var _this7 = _possibleConstructorReturn(this, (Comment.__proto__ || Object.getPrototypeOf(Comment)).call(this));
+    var _this = _possibleConstructorReturn(this, (Comment.__proto__ || Object.getPrototypeOf(Comment)).call(this));
 
-    _this7.state = {
+    _this.state = {
       isAbusive: false
     };
-    return _this7;
+    return _this;
   }
 
   _createClass(Comment, [{
@@ -30851,7 +31056,7 @@ var Comment = function (_React$Component4) {
         _react2.default.createElement(
           'div',
           { className: 'comment-actions' },
-          _react2.default.createElement(CommentRemoveConfirmation, { onDelete: this._handleDelete.bind(this) }),
+          _react2.default.createElement(_commentRemoveConfirmation2.default, { onDelete: this._handleDelete.bind(this) }),
           _react2.default.createElement(
             'a',
             { href: '#', onClick: this._toggleAbuse.bind(this) },
@@ -30879,81 +31084,7 @@ var Comment = function (_React$Component4) {
   return Comment;
 }(_react2.default.Component);
 
-var CommentRemoveConfirmation = function (_React$Component5) {
-  _inherits(CommentRemoveConfirmation, _React$Component5);
+exports.default = Comment;
 
-  function CommentRemoveConfirmation() {
-    _classCallCheck(this, CommentRemoveConfirmation);
-
-    var _this8 = _possibleConstructorReturn(this, (CommentRemoveConfirmation.__proto__ || Object.getPrototypeOf(CommentRemoveConfirmation)).call(this));
-
-    _this8.state = {
-      showConfirm: false
-    };
-    return _this8;
-  }
-
-  _createClass(CommentRemoveConfirmation, [{
-    key: 'render',
-    value: function render() {
-
-      var confirmNode = void 0;
-
-      if (this.state.showConfirm) {
-        return _react2.default.createElement(
-          'span',
-          null,
-          _react2.default.createElement(
-            'a',
-            { href: '', onClick: this._confirmDelete.bind(this) },
-            'Yes '
-          ),
-          ' - or - ',
-          _react2.default.createElement(
-            'a',
-            { href: '', onClick: this._toggleConfirmMessage.bind(this) },
-            ' No'
-          )
-        );
-      } else {
-        confirmNode = _react2.default.createElement(
-          'a',
-          { href: '', onClick: this._toggleConfirmMessage.bind(this) },
-          'Delete comment?'
-        );
-      }
-
-      return _react2.default.createElement(
-        'span',
-        null,
-        confirmNode
-      );
-    }
-  }, {
-    key: '_toggleConfirmMessage',
-    value: function _toggleConfirmMessage(e) {
-      e.preventDefault();
-
-      this.setState({
-        showConfirm: !this.state.showConfirm
-      });
-    }
-  }, {
-    key: '_confirmDelete',
-    value: function _confirmDelete(e) {
-      e.preventDefault();
-      this.props.onDelete();
-    }
-  }]);
-
-  return CommentRemoveConfirmation;
-}(_react2.default.Component);
-
-(0, _jquery2.default)(function () {
-  _reactDom2.default.render(_react2.default.createElement(CommentBox, null), document.getElementById('comment-box'), function () {
-    console.timeEnd('react-app');
-  });
-});
-
-},{"jquery":24,"react":178,"react-dom":27}]},{},[179])
+},{"./comment-remove-confirmation":183,"react":178}]},{},[179])
 //# sourceMappingURL=bundle.js.map
