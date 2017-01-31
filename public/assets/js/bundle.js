@@ -30810,13 +30810,13 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var CommentRemoveConfirmation = function (_React$Component) {
-  _inherits(CommentRemoveConfirmation, _React$Component);
+var CommentConfirmation = function (_React$Component) {
+  _inherits(CommentConfirmation, _React$Component);
 
-  function CommentRemoveConfirmation() {
-    _classCallCheck(this, CommentRemoveConfirmation);
+  function CommentConfirmation() {
+    _classCallCheck(this, CommentConfirmation);
 
-    var _this = _possibleConstructorReturn(this, (CommentRemoveConfirmation.__proto__ || Object.getPrototypeOf(CommentRemoveConfirmation)).call(this));
+    var _this = _possibleConstructorReturn(this, (CommentConfirmation.__proto__ || Object.getPrototypeOf(CommentConfirmation)).call(this));
 
     _this.state = {
       showConfirm: false
@@ -30824,7 +30824,7 @@ var CommentRemoveConfirmation = function (_React$Component) {
     return _this;
   }
 
-  _createClass(CommentRemoveConfirmation, [{
+  _createClass(CommentConfirmation, [{
     key: "render",
     value: function render() {
 
@@ -30877,10 +30877,15 @@ var CommentRemoveConfirmation = function (_React$Component) {
     }
   }]);
 
-  return CommentRemoveConfirmation;
+  return CommentConfirmation;
 }(_react2.default.Component);
 
-exports.default = CommentRemoveConfirmation;
+exports.default = CommentConfirmation;
+
+
+CommentConfirmation.propTypes = {
+  onConfirm: _react2.default.PropTypes.func.isRequired
+};
 
 },{"react":178}],183:[function(require,module,exports){
 "use strict";
@@ -31072,7 +31077,6 @@ var Comment = function (_React$Component) {
   }, {
     key: '_toggleAbuse',
     value: function _toggleAbuse() {
-
       this.setState({
         isAbusive: !this.state.isAbusive
       });
