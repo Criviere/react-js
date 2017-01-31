@@ -30789,7 +30789,100 @@ var CommentBox = function (_React$Component) {
 
 exports.default = CommentBox;
 
-},{"./comment":184,"./comment-avatar-list":180,"./comment-form":182,"jquery":24,"react":178}],182:[function(require,module,exports){
+},{"./comment":184,"./comment-avatar-list":180,"./comment-form":183,"jquery":24,"react":178}],182:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require("react");
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var CommentRemoveConfirmation = function (_React$Component) {
+  _inherits(CommentRemoveConfirmation, _React$Component);
+
+  function CommentRemoveConfirmation() {
+    _classCallCheck(this, CommentRemoveConfirmation);
+
+    var _this = _possibleConstructorReturn(this, (CommentRemoveConfirmation.__proto__ || Object.getPrototypeOf(CommentRemoveConfirmation)).call(this));
+
+    _this.state = {
+      showConfirm: false
+    };
+    return _this;
+  }
+
+  _createClass(CommentRemoveConfirmation, [{
+    key: "render",
+    value: function render() {
+
+      var confirmNode = void 0;
+
+      if (this.state.showConfirm) {
+        return _react2.default.createElement(
+          "span",
+          null,
+          _react2.default.createElement(
+            "a",
+            { href: "", onClick: this._confirmDelete.bind(this) },
+            "Yes "
+          ),
+          " - or - ",
+          _react2.default.createElement(
+            "a",
+            { href: "", onClick: this._toggleConfirmMessage.bind(this) },
+            " No"
+          )
+        );
+      } else {
+        confirmNode = _react2.default.createElement(
+          "a",
+          { href: "", onClick: this._toggleConfirmMessage.bind(this) },
+          this.props.children
+        );
+      }
+
+      return _react2.default.createElement(
+        "span",
+        null,
+        confirmNode
+      );
+    }
+  }, {
+    key: "_toggleConfirmMessage",
+    value: function _toggleConfirmMessage(e) {
+      e.preventDefault();
+
+      this.setState({
+        showConfirm: !this.state.showConfirm
+      });
+    }
+  }, {
+    key: "_confirmDelete",
+    value: function _confirmDelete(e) {
+      e.preventDefault();
+      this.props.onConfirm();
+    }
+  }]);
+
+  return CommentRemoveConfirmation;
+}(_react2.default.Component);
+
+exports.default = CommentRemoveConfirmation;
+
+},{"react":178}],183:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -30891,99 +30984,6 @@ var CommentForm = function (_React$Component) {
 
 exports.default = CommentForm;
 
-},{"react":178}],183:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = require("react");
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var CommentRemoveConfirmation = function (_React$Component) {
-  _inherits(CommentRemoveConfirmation, _React$Component);
-
-  function CommentRemoveConfirmation() {
-    _classCallCheck(this, CommentRemoveConfirmation);
-
-    var _this = _possibleConstructorReturn(this, (CommentRemoveConfirmation.__proto__ || Object.getPrototypeOf(CommentRemoveConfirmation)).call(this));
-
-    _this.state = {
-      showConfirm: false
-    };
-    return _this;
-  }
-
-  _createClass(CommentRemoveConfirmation, [{
-    key: "render",
-    value: function render() {
-
-      var confirmNode = void 0;
-
-      if (this.state.showConfirm) {
-        return _react2.default.createElement(
-          "span",
-          null,
-          _react2.default.createElement(
-            "a",
-            { href: "", onClick: this._confirmDelete.bind(this) },
-            "Yes "
-          ),
-          " - or - ",
-          _react2.default.createElement(
-            "a",
-            { href: "", onClick: this._toggleConfirmMessage.bind(this) },
-            " No"
-          )
-        );
-      } else {
-        confirmNode = _react2.default.createElement(
-          "a",
-          { href: "", onClick: this._toggleConfirmMessage.bind(this) },
-          "Delete comment?"
-        );
-      }
-
-      return _react2.default.createElement(
-        "span",
-        null,
-        confirmNode
-      );
-    }
-  }, {
-    key: "_toggleConfirmMessage",
-    value: function _toggleConfirmMessage(e) {
-      e.preventDefault();
-
-      this.setState({
-        showConfirm: !this.state.showConfirm
-      });
-    }
-  }, {
-    key: "_confirmDelete",
-    value: function _confirmDelete(e) {
-      e.preventDefault();
-      this.props.onDelete();
-    }
-  }]);
-
-  return CommentRemoveConfirmation;
-}(_react2.default.Component);
-
-exports.default = CommentRemoveConfirmation;
-
 },{"react":178}],184:[function(require,module,exports){
 'use strict';
 
@@ -30997,9 +30997,9 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _commentRemoveConfirmation = require('./comment-remove-confirmation');
+var _commentConfirmation = require('./comment-confirmation');
 
-var _commentRemoveConfirmation2 = _interopRequireDefault(_commentRemoveConfirmation);
+var _commentConfirmation2 = _interopRequireDefault(_commentConfirmation);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -31056,10 +31056,14 @@ var Comment = function (_React$Component) {
         _react2.default.createElement(
           'div',
           { className: 'comment-actions' },
-          _react2.default.createElement(_commentRemoveConfirmation2.default, { onDelete: this._handleDelete.bind(this) }),
           _react2.default.createElement(
-            'a',
-            { href: '#', onClick: this._toggleAbuse.bind(this) },
+            _commentConfirmation2.default,
+            { onConfirm: this._handleDelete.bind(this) },
+            'Delete Comment?'
+          ),
+          _react2.default.createElement(
+            _commentConfirmation2.default,
+            { onConfirm: this._toggleAbuse.bind(this) },
             'Report as Abuse'
           )
         )
@@ -31067,8 +31071,7 @@ var Comment = function (_React$Component) {
     }
   }, {
     key: '_toggleAbuse',
-    value: function _toggleAbuse(event) {
-      event.preventDefault();
+    value: function _toggleAbuse() {
 
       this.setState({
         isAbusive: !this.state.isAbusive
@@ -31086,5 +31089,5 @@ var Comment = function (_React$Component) {
 
 exports.default = Comment;
 
-},{"./comment-remove-confirmation":183,"react":178}]},{},[179])
+},{"./comment-confirmation":182,"react":178}]},{},[179])
 //# sourceMappingURL=bundle.js.map
